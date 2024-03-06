@@ -1,0 +1,12 @@
+C:\Users\iaspa\.dotnet\New folder\Applicationdemo\ClassLibrary1\bin\Debug\net8.0\ClassLibrary.deps.json
+C:\Users\iaspa\.dotnet\New folder\Applicationdemo\ClassLibrary1\bin\Debug\net8.0\ClassLibrary.dll
+C:\Users\iaspa\.dotnet\New folder\Applicationdemo\ClassLibrary1\bin\Debug\net8.0\ClassLibrary.pdb
+C:\Users\iaspa\.dotnet\New folder\Applicationdemo\ClassLibrary1\obj\Debug\net8.0\ClassLibrary.csproj.AssemblyReference.cache
+C:\Users\iaspa\.dotnet\New folder\Applicationdemo\ClassLibrary1\obj\Debug\net8.0\ClassLibrary.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\iaspa\.dotnet\New folder\Applicationdemo\ClassLibrary1\obj\Debug\net8.0\ClassLibrary.AssemblyInfoInputs.cache
+C:\Users\iaspa\.dotnet\New folder\Applicationdemo\ClassLibrary1\obj\Debug\net8.0\ClassLibrary.AssemblyInfo.cs
+C:\Users\iaspa\.dotnet\New folder\Applicationdemo\ClassLibrary1\obj\Debug\net8.0\ClassLibrary.csproj.CoreCompileInputs.cache
+C:\Users\iaspa\.dotnet\New folder\Applicationdemo\ClassLibrary1\obj\Debug\net8.0\ClassLibrary.dll
+C:\Users\iaspa\.dotnet\New folder\Applicationdemo\ClassLibrary1\obj\Debug\net8.0\refint\ClassLibrary.dll
+C:\Users\iaspa\.dotnet\New folder\Applicationdemo\ClassLibrary1\obj\Debug\net8.0\ClassLibrary.pdb
+C:\Users\iaspa\.dotnet\New folder\Applicationdemo\ClassLibrary1\obj\Debug\net8.0\ref\ClassLibrary.dll
