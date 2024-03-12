@@ -68,3 +68,4 @@ C:\Users\iaspa\.dotnet\New folder\Applicationdemo\Application\obj\Debug\net8.0\r
 C:\Users\iaspa\.dotnet\New folder\Applicationdemo\Application\obj\Debug\net8.0\Application.pdb
 C:\Users\iaspa\.dotnet\New folder\Applicationdemo\Application\obj\Debug\net8.0\Application.genruntimeconfig.cache
 C:\Users\iaspa\.dotnet\New folder\Applicationdemo\Application\obj\Debug\net8.0\ref\Application.dll
+C:\Users\iaspa\.dotnet\New folder\Applicationdemo\Application\obj\Debug\net8.0\Application.sourcelink.json

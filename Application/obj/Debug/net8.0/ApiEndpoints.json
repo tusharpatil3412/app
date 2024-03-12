@@ -217,8 +217,40 @@
   },
   {
     "ContainingType": "Application.Controllers.RecordController",
+    "Method": "UpdateCheckout",
+    "RelativePath": "api/Record/{id}/checkout",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Application.Controllers.RecordController",
     "Method": "GetRecordsByEmpId",
     "RelativePath": "api/Record/ByEmpId/{empId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "empId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Application.Controllers.RecordController",
+    "Method": "GetTodayRecordsByEmpId",
+    "RelativePath": "api/Record/TodayByEmpId/{empId}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,

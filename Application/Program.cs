@@ -1,5 +1,6 @@
 
 using ClassLibrary.data;
+using ClassLibrary.Models;
 using ClassLibrary.repo;
 using System.Threading.RateLimiting;
 
@@ -7,6 +8,8 @@ namespace Application
 {
     public class Program
     {
+  
+
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
@@ -21,7 +24,14 @@ namespace Application
             builder.Services.AddTransient<IAdminrepo, Adminrepo>();
             builder.Services.AddTransient<IEmployeerepo,Employeerepo>();
             builder.Services.AddTransient<IRecordrepo, Recordrepo>();
-
+            builder.Services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(
+                    policy =>
+                    {
+                        policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+                    });
+            });
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -30,13 +40,15 @@ namespace Application
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-
+            app.UseCors();
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
 
 
             app.MapControllers();
+           
+
 
             app.Run();
         }

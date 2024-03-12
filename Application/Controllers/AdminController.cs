@@ -49,9 +49,10 @@ namespace Application.Controllers
                 }
 
                 var success = await _repo.AddAdmin(admin);
-                if (success)
+
+                if (success!=null)
                 {
-                    return Ok();
+                return Ok(success);
                 }
                 else
                 {
@@ -123,7 +124,7 @@ namespace Application.Controllers
 
             // Upon successful verification, return an appropriate response.
             // In a real application, you might issue a JWT token or another form of session token here.
-            return Ok(new { message = "Login successful." });
+            return Ok(admin);
         }
     }
     }

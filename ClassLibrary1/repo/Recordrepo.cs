@@ -40,12 +40,32 @@ namespace ClassLibrary.repo
                 return await _db.GetData<Record, dynamic>(query, new { Emp_Id = empId });
             }
 
-            public async Task CreateRecord(Record record)
+            public async Task<bool> CreateRecord(Record record)
             {
-                string query = "INSERT INTO record (checkin, emp_id) VALUES (@Checkin, @Emp_Id)";
+              
+                string query = "INSERT INTO record ( emp_id) VALUES ( @Emp_Id)";
                 await _db.SaveData(query, record);
+                return true;
+           
             }
+        public async Task UpdateCheckoutTime(int id)
+        {
+            string query = "UPDATE record SET checkout = GETDATE() WHERE emp_id = @Id;";
+            await _db.SaveData(query, new {  Id= id });
         }
+        public async Task<IEnumerable<Record>> GetTodayRecordsByEmpId(int empId)
+        {
+            var query = @"
+                SELECT * 
+                FROM record
+                WHERE emp_id = @EmpId 
+                AND CAST(checkin AS DATE) = CAST(GETDATE() AS DATE);";
+
+            var parameters = new { EmpId = empId };
+            var result= await _db.GetData<Record, dynamic>(query, parameters);
+            return result;
+        }
+    }
 
 }
 

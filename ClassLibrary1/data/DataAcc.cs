@@ -31,6 +31,12 @@ namespace ClassLibrary.data
             using IDbConnection connection = new SqlConnection(_config.GetConnectionString(connectionid));
             await connection.ExecuteAsync(query, parametetrs);
         }
+        public async Task<int> SaveDataAndGetId<P>(string query, P parameters, string connectionid = "key")
+        {
+            using IDbConnection connection = new SqlConnection(_config.GetConnectionString(connectionid));
+            int newId = await connection.QuerySingleAsync<int>(query, parameters);
+            return newId;
+        }
 
     }
 }

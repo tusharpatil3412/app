@@ -11,7 +11,7 @@ namespace ClassLibrary.Models
 
         public int Id { get; set; }
         public DateTime Checkin { get; set; }
-        public DateTime Checkout { get; set; }
+        public DateTime? Checkout { get; set; }
         public int Emp_Id { get; set; }
     }
 }

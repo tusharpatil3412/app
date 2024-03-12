@@ -11,7 +11,7 @@ namespace ClassLibrary.repo
 {
     public interface IAdminrepo
     {
-        Task<bool> AddAdmin(Admin admin);
+        Task<Admin> AddAdmin(Admin admin);
         Task<bool> DeleteAdmin(int id);
         Task<Admin> GetByIdAdmin(int id);
 

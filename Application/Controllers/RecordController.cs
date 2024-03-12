@@ -50,10 +50,38 @@ namespace Application.Controllers
             {
                 return BadRequest(ModelState);
             }
-            await _repo.CreateRecord(record);
-            // Assuming record.Id is populated by the database upon insertion
-            return CreatedAtAction(nameof(GetRecordById), new { id = record.Id }, record);
-        }
+            var records = await _repo.GetTodayRecordsByEmpId(record.Emp_Id);
+            if (records == null || !records.Any())
+            {
+                var result = await _repo.CreateRecord(record);
 
+                // Assuming record.Id is populated by the database upon insertion
+                return Ok(result);
+            }
+            else { return BadRequest(ModelState); }
+        }
+        [HttpPut("{id}/checkout")]
+        public async Task<IActionResult> UpdateCheckout(int id)
+        {
+            try
+            {
+                await _repo.UpdateCheckoutTime(id);
+                return Ok($"Checkout time updated successfully for record ID: {id}");
+            }
+            catch (Exception ex)
+            {
+                // Log the exception or handle it as needed
+                return StatusCode(500, "An error occurred while updating the checkout time.");
+            }
+        }
+       [HttpGet("TodayByEmpId/{empId}")]
+       public async Task<IActionResult> GetTodayRecordsByEmpId(int empId)
+   {
+            var records = await _repo.GetTodayRecordsByEmpId(empId);
+            if (records == null || !records.Any())
+                return NotFound($"No records found for today for emp_id: {empId}");
+
+           return Ok(records);
+        }
     }
 }

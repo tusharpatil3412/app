@@ -10,3 +10,4 @@ C:\Users\iaspa\.dotnet\New folder\Applicationdemo\ClassLibrary1\obj\Debug\net8.0
 C:\Users\iaspa\.dotnet\New folder\Applicationdemo\ClassLibrary1\obj\Debug\net8.0\refint\ClassLibrary.dll
 C:\Users\iaspa\.dotnet\New folder\Applicationdemo\ClassLibrary1\obj\Debug\net8.0\ClassLibrary.pdb
 C:\Users\iaspa\.dotnet\New folder\Applicationdemo\ClassLibrary1\obj\Debug\net8.0\ref\ClassLibrary.dll
+C:\Users\iaspa\.dotnet\New folder\Applicationdemo\ClassLibrary1\obj\Debug\net8.0\ClassLibrary.sourcelink.json

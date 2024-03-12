@@ -20,17 +20,17 @@ namespace ClassLibrary.repo
                 _db = db;
             }
 
-            public async Task<bool> AddAdmin(Admin admin)
+            public async Task<Admin> AddAdmin(Admin admin)
             {
                 try
                 {
-                    string query = "INSERT INTO admin (username, password) VALUES (@Username, @Password)";
-                    await _db.SaveData(query, new { Username = admin.Username, Password = admin.Password });
-                    return true;
+                    string query = "INSERT INTO admin (username, password) OUTPUT INSERTED.id VALUES (@Username, @Password)";
+                    var id= await _db.SaveDataAndGetId(query, new { Username = admin.Username, Password = admin.Password });
+                    return await GetByIdAdmin(id);
                 }
                 catch (Exception)
                 {
-                    return false;
+                    return admin;
                 }
             }
 

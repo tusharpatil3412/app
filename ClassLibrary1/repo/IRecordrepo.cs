@@ -11,7 +11,9 @@ namespace ClassLibrary.repo
     {
         Task<IEnumerable<Record>> GetAllRecords();
         Task<Record> GetRecordById(int id);
-        Task CreateRecord(Record record);
+        Task<bool> CreateRecord(Record record);
         Task<IEnumerable<Record>> GetRecordsByEmpId(int empId);
+        Task UpdateCheckoutTime(int id);
+        Task<IEnumerable<Record>> GetTodayRecordsByEmpId(int empId);
     }
 }

@@ -10,5 +10,6 @@ namespace ClassLibrary.data
     {
         Task<IEnumerable<T>> GetData<T, P>(string query, P parametetrs, string connectionid = "key");
         Task SaveData<P>(string query, P parametetrs, string connectionid = "key");
+        Task<int> SaveDataAndGetId<P>(string query, P parameters, string connectionid = "key");
     }
 }
