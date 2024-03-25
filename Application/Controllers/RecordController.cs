@@ -41,10 +41,17 @@ namespace Application.Controllers
             if (records == null) return NotFound($"No records found for emp_id: {empId}");
             return Ok(records);
         }
+        [HttpGet("Today")]
+        public async Task<IActionResult> GetRecordsToday()
+        {
+            var records = await _repo.GetToday();
+            if (records == null) return NotFound($"No records found ");
+            return Ok(records);
+        }
 
         // POST: api/Record
         [HttpPost]
-        public async Task<IActionResult> CreateRecord([FromBody] Record record)
+        public async Task<IActionResult> CreateRecord([FromBody] EmpCheckIn record)
         {
             if (!ModelState.IsValid)
             {
@@ -60,28 +67,45 @@ namespace Application.Controllers
             }
             else { return BadRequest(ModelState); }
         }
-        [HttpPut("{id}/checkout")]
-        public async Task<IActionResult> UpdateCheckout(int id)
+        [HttpPost("checkout")]
+        public async Task<IActionResult> UpdateCheckout(int EmpId)
         {
+            var records = await _repo.GetTodayRecordsByEmpId(EmpId);
+            if (records == null || !records.Any())
+                return Ok(null);
             try
             {
-                await _repo.UpdateCheckoutTime(id);
-                return Ok($"Checkout time updated successfully for record ID: {id}");
+                await _repo.UpdateCheckoutTime(EmpId);
+                return Ok(true);
             }
             catch (Exception ex)
             {
                 // Log the exception or handle it as needed
-                return StatusCode(500, "An error occurred while updating the checkout time.");
+                return Ok(null);
             }
         }
-       [HttpGet("TodayByEmpId/{empId}")]
-       public async Task<IActionResult> GetTodayRecordsByEmpId(int empId)
-   {
+        [HttpGet("TodayByEmpId/{empId}")]
+        public async Task<IActionResult> GetTodayRecordsByEmpId(int empId)
+        {
             var records = await _repo.GetTodayRecordsByEmpId(empId);
             if (records == null || !records.Any())
-                return NotFound($"No records found for today for emp_id: {empId}");
+                return Ok(null);
 
-           return Ok(records);
+            return Ok(records);
+        }
+        
+        [HttpGet("getRecordsByRange")]
+        public async Task<IActionResult> GetRecordsByRange(int empid, string startdt, string enddt)
+        {
+            try
+            {
+                var results = await _repo.GetRecordsByCheckinDateRange(empid,startdt,enddt);
+                return Ok(results);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error: {ex.Message}");
+            }
         }
     }
 }

@@ -47,9 +47,9 @@ namespace Application.Controllers
                 var success = await _repo.AddEmployee(employee);
                 if (!success)
                 {
-                    return BadRequest("Could not add the employee");
+                    return BadRequest(false);
                 }
-                return Ok("Employee added successfully");
+                return Ok(true);
             }
 
             // PUT api/Employee/5
@@ -83,5 +83,26 @@ namespace Application.Controllers
                 }
                 return Ok("Employee deleted successfully");
             }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] employeeLogin login)
+        {
+            if (login == null || string.IsNullOrWhiteSpace(login.Username) || string.IsNullOrWhiteSpace(login.Password))
+            {
+                return BadRequest("Login request must contain both username and password.");
+            }
+
+            var employee = await _repo.LoginEmp(login.Username,login.Password);
+
+            if (employee == null)
+            {
+                return Unauthorized("No such user exists.");
+            }
+
+            // Here, use your method to check the password. This example directly compares the password,
+            // which you should replace with a proper hash verification method.
+          
+            return Ok(employee);
         }
+    }
 }

@@ -87,6 +87,19 @@ namespace ClassLibrary.repo
                 return false;
             }
         }
+        public async Task<Employee> LoginEmp(string username,string password)
+        {
+            try
+            {
+                string query = "SELECT * FROM employee WHERE username = @Username AND password =@Password ;";
+                var result = await _db.GetData<Employee, dynamic>(query, new { Username = username,Password=password });
+                return result.FirstOrDefault();
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
     }
 }
 

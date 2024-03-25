@@ -11,9 +11,12 @@ namespace ClassLibrary.repo
     {
         Task<IEnumerable<Record>> GetAllRecords();
         Task<Record> GetRecordById(int id);
-        Task<bool> CreateRecord(Record record);
+        Task<bool> CreateRecord(EmpCheckIn record);
+        Task<IEnumerable<Record>> GetToday();
         Task<IEnumerable<Record>> GetRecordsByEmpId(int empId);
-        Task UpdateCheckoutTime(int id);
+        Task UpdateCheckoutTime(int empId);
         Task<IEnumerable<Record>> GetTodayRecordsByEmpId(int empId);
+        //Task<List<Record>> GetRecordsByCheckinDateRange(dateracord  record);
+        Task<List<Record>> GetRecordsByCheckinDateRange(int empid, string startdt, string enddt);
     }
 }

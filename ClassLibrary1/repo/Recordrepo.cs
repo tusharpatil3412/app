@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static ClassLibrary.repo.Recordrepo;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ClassLibrary.repo
 {
@@ -33,14 +34,21 @@ namespace ClassLibrary.repo
                 var result = await _db.GetData<Record, dynamic>(query, new { Id = id });
                 return result.FirstOrDefault();
             }
+        public async Task<IEnumerable<Record>> GetToday()
+        {
+            string query = "SELECT * FROM record WHERE CAST(checkin AS DATE) = CAST(GETDATE() AS DATE);";
+            
+            return await _db.GetData<Record, dynamic>(query,null);
+            
+        }
 
-            public async Task<IEnumerable<Record>> GetRecordsByEmpId(int empId)
+        public async Task<IEnumerable<Record>> GetRecordsByEmpId(int empId)
             {
                 string query = "SELECT * FROM record WHERE emp_id = @Emp_Id";
                 return await _db.GetData<Record, dynamic>(query, new { Emp_Id = empId });
             }
 
-            public async Task<bool> CreateRecord(Record record)
+            public async Task<bool> CreateRecord(EmpCheckIn record )
             {
               
                 string query = "INSERT INTO record ( emp_id) VALUES ( @Emp_Id)";
@@ -48,10 +56,12 @@ namespace ClassLibrary.repo
                 return true;
            
             }
-        public async Task UpdateCheckoutTime(int id)
+        public async Task UpdateCheckoutTime(int empId)
         {
-            string query = "UPDATE record SET checkout = GETDATE() WHERE emp_id = @Id;";
-            await _db.SaveData(query, new {  Id= id });
+            string query = @"UPDATE record SET checkout = GETDATE()
+                    WHERE CAST(checkin AS DATE) = CAST(GETDATE() AS DATE)  
+                AND emp_id = @EmpId AND checkout IS NULL;";
+            await _db.SaveData(query, new {  EmpId= empId });
         }
         public async Task<IEnumerable<Record>> GetTodayRecordsByEmpId(int empId)
         {
@@ -65,6 +75,25 @@ namespace ClassLibrary.repo
             var result= await _db.GetData<Record, dynamic>(query, parameters);
             return result;
         }
+       /* public async Task<List<Record>> GetRecordsByCheckinDateRange(dateracord record)
+        {
+            string query = " SELECT * FROM record WHERE emp_id = @Emp_Id AND checkin BETWEEN @startDt AND @endDt";
+           
+
+            var results = await _db.GetData<Record, dynamic>(query, record);
+
+            return results.ToList();
+        }  */ 
+        public async Task<List<Record>> GetRecordsByCheckinDateRange(int empid, string startdt, string enddt)
+        {
+            string query = " SELECT * FROM record WHERE emp_id = @empid AND checkin BETWEEN @startdt AND @enddt";
+           
+
+            var results = await _db.GetData<Record, dynamic>(query, new { empid = empid, startdt=startdt, enddt=enddt });
+
+            return results.ToList();
+        }
+
     }
 
 }
